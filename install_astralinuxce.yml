@@ -1,0 +1,64 @@
+  - name: install soft astra linux
+    apt:
+       name: "{{ item }}"
+       state: present 
+       default_release: orel 
+    with_items:
+       - libreoffice
+       - libreoffice-l10n-ru
+       - libreoffice-help-ru
+       - remmina
+       - remmina-plugin*
+       - w3m
+       - default-jre
+       - ethtool
+       - lsb-base
+       - lsb-core
+       - alien
+       - vino
+       - xrdp
+       - git
+
+  - name: Add repo Strech
+    apt_repository:
+       repo: deb https://mirror.yandex.ru/debian/ stretch contrib main non-free
+       state: present
+       update_cache: yes
+
+  - name: Creates directory Downloads
+    file: path=/root/Downloads state=directory
+
+  - name: Downloads file 
+    get_url:
+       url: "{{ item }}"  
+       dest: /root/Downloads/
+    with_items:
+       - https://apt.puppetlabs.com/puppet-release-stretch.deb
+       - https://repo.skype.com/latest/skypeforlinux-64.deb
+       - https://datapacket.dl.sourceforge.net/project/projectlibre/ProjectLibre/1.5.9/projectlibre_1.5.9-1.deb
+       - http://download.sputnik.ru/browser/sputnik-browser-astralinux_amd64.deb
+       - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+  - name: install deb 
+    apt:
+      deb: "{{ item }}"
+      update_cache: yes
+    with_items:
+       - "/root/Downloads/puppet-release-stretch.deb"
+       - "/root/Downloads/skypeforlinux-64.deb"
+       - "/root/Downloads/projectlibre_1.5.9-1.deb"
+       - "/root/Downloads/sputnik-browser-astralinux_amd64.deb"
+       - "/root/Downloads/google-chrome-stable_current_amd64.deb"
+
+  - name: install soft Debian
+    apt:
+       name: "{{ item }}"
+       state: present
+       default_release: stretch
+    with_items:
+       - playonlinux
+       - puppet-agent
+       - x11vnc
+       - freerdp-x11
+
+# END

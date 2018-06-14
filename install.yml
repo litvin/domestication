@@ -1,0 +1,86 @@
+--- - hosts: orel
+  tasks:
+  - name: Add repo Strech
+    apt_repository:
+      repo: deb https://mirror.yandex.ru/debian/ stretch contrib main 
+non-free
+      state: present
+  - name: Install libreoffice
+    apt: name=libreoffice state=present
+  - name: Install remmina
+    apt: name=remmina state=present
+  - name: Install remmina-plugin
+    apt: name=remmina-plugin* state=present
+  - name: Install w3m
+    apt: name=w3m state=present
+  - name: Install playonlinux
+    apt: name=playonlinux state=present
+  - name: Install default-jre
+    apt: name=default-jre state=present
+  - name: Install ethtool
+    apt: name=ethtool state=present
+  - name: Install lsb-base
+    apt: name=lsb-base state=present
+  - name: Install lsb-core
+    apt: name=lsb-core state=present
+  - name: Install alien
+    apt: name=alien state=present
+  - name: Install vino
+    apt: name=vino state=present
+  - name: Install x11vnc
+    apt: name=x11vnc state=present
+  - name: Install xrdp
+    apt: name=xrdp state=present
+  - name: Install freerdp-x11
+    apt: name=freerdp-x11 state=present
+  - name: Install git
+    apt: name=git state=present
+  - name: Creates directory Downloads
+    file: path=/root/Downloads state=directory
+  - name: Downloads GoogleChrome
+    get_url:
+      url: 
+https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      dest: /root/Downloads/google-chrome-stable_current_amd64.deb
+  - name: Downloads Projectlibre
+    get_url:
+      url: 
+https://datapacket.dl.sourceforge.net/project/projectlibre/ProjectLibre/1.5.9/projectlibre_1.5.9-1.deb
+      dest: /root/Downloads/projectlibre_1.5.9-1.deb
+  - name: Downloads Skypeforlinux
+    get_url:
+      url: https://repo.skype.com/latest/skypeforlinux-64.deb
+      dest: /root/Downloads/skypeforlinux-64.deb
+  - name: Downloads Sputnik
+    get_url:
+      url: 
+http://download.sputnik.ru/browser/sputnik-browser-astralinux_amd64.deb
+      dest: /root/Downloads/sputnik-browser-astralinux_amd64.deb
+  - name: Downloads puppet-repo
+    get_url:
+      url: https://apt.puppetlabs.com/puppet-release-stretch.deb
+      dest: /root/Downloads/puppet-release-stretch.deb
+  - name: install GoogleChrome
+    apt:
+      deb: /root/Downloads/google-chrome-stable_current_amd64.deb
+  - name: install Projectlibre
+    apt:
+      deb: /root/Downloads/projectlibre_1.5.9-1.deb
+  - name: install Skypeforlinux
+    apt:
+      deb: /root/Downloads/skypeforlinux-64.deb
+  - name: install Sputnik
+    apt:
+      deb: /root/Downloads/sputnik-browser-astralinux_amd64.deb
+  - name: install puppet-repo
+    apt:
+      deb: /root/Downloads/puppet-release-stretch.deb
+      update_cache: yes
+  - name: install puppet-agent
+    apt:
+      name: puppet-agent
+      state: present
+    # #  w3m playonlinux libreoffice playonlinux default-jre ethtool 
+    # #  lsb-base alien lsb-core vino x11vnc xrdp freerdp-x11 remmina 
+    # #  remmina-plugin* git google-chrome projectLibre skypeforlinux 
+    # #  sputnik puppet-agent

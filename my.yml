@@ -1,0 +1,17 @@
+---
+- hosts: orel
+  remote_user: rc
+  become: yes
+  become_user: root
+  become_method: sudo
+  gather_facts: True
+  tasks:
+
+  - debug:
+      msg: "ansible_distribution = {{ ansible_distribution }} "
+
+  - include: install_astralinuxce.yml
+    when: ansible_distribution == "\"astralinuxce\"" 
+
+  - include: install_alt.yml
+    when: ansible_distribution == "CentOS"

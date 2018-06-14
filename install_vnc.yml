@@ -1,0 +1,39 @@
+---
+- hosts: orel
+  remote_user: rc
+  become: yes
+  become_user: root
+  become_method: sudo
+  gather_facts: True
+  tasks:
+
+  - debug:
+      msg: "ansible_distribution = {{ ansible_distribution }} "
+
+  - name: install vnc server
+    apt:
+      name: x11vnc
+      state: installed
+      update_cache: yes
+
+  - name: create directory .vnc
+    file: path=/root/.vnc state=directory
+
+  - name: copy passwd files
+    copy:
+      src: /home/rc/ansible/templates/passwd
+      dest: /root/.vnc/passwd
+      mode: 0600
+
+  - name: create automaticaly start via systemd
+    copy:
+      src: /home/rc/ansible/templates/x11vnc.service
+      dest: /lib/systemd/system/x11vnc.service
+
+  - name: enable x11vnc.service
+    systemd: 
+       daemon_reload: yes
+       name: x11vnc.service
+       enabled: yes
+       state: started
+

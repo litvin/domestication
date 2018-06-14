@@ -1,0 +1,15 @@
+--- 
+- hosts: orel
+  remote_user: rc
+  become: yes
+  become_user: root
+  become_method: sudo
+  gather_facts: True
+  tasks:
+  - name: Add repo Strech
+    apt_repository:
+      repo: deb https://mirror.yandex.ru/debian/ stretch contrib main non-free
+      state: present
+  - name: Install libreoffice
+    apt: name=libreoffice* state=absent
+
