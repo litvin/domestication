@@ -38,6 +38,7 @@
        - https://datapacket.dl.sourceforge.net/project/projectlibre/ProjectLibre/1.5.9/projectlibre_1.5.9-1.deb
        - http://download.sputnik.ru/browser/sputnik-browser-astralinux_amd64.deb
        - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+       - https://download1.operacdn.com/pub/opera/desktop/54.0.2952.41/linux/opera-stable_54.0.2952.41_amd64.deb
 
   - name: install deb 
     apt:
@@ -49,6 +50,7 @@
        - "/root/Downloads/projectlibre_1.5.9-1.deb"
        - "/root/Downloads/sputnik-browser-astralinux_amd64.deb"
        - "/root/Downloads/google-chrome-stable_current_amd64.deb"
+       - "/root/Downloads/opera-stable_54.0.2952.41_amd64.deb"
 
   - name: install soft Debian
     apt:
@@ -60,5 +62,7 @@
        - puppet-agent
        - x11vnc
        - freerdp-x11
+       - evolution
+       - evolution-ews
 
 # END
