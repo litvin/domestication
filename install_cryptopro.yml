@@ -1,0 +1,68 @@
+--- 
+- hosts: orel
+
+  remote_user: rc
+  become: yes
+  become_user: root
+  become_method: sudo
+  gather_facts: True
+
+  tasks:
+
+   - name: Install pkg for work
+     apt:
+         name: "{{ item }}"
+         state: present
+     with_items:
+         - alien
+         - pcscd
+         - opensc
+
+   - name: Creates directory Downloads
+     file: path=/root/Downloads/CryptoPro/ state=directory
+
+   - name: Copy "gdown" script to /usr/local/bin
+     copy: src=gdown.pl
+           dest=/usr/local/bin/gdown
+           mode=0755
+
+   - name: Download files
+     command: "{{ item }}"
+     with_items:
+         - "/usr/local/bin/gdown https://drive.google.com/file/d/1KPjhuezY7Z0bCWh-EnYLv5Q238fHuSXK/view?usp=sharing  /root/Downloads/CryptoPro/linux-amd64_deb.tgz"
+         - "/usr/local/bin/gdown https://drive.google.com/file/d/1xuCodCVoHHle9EtUM5o9j8-oD-sY43V1/view?usp=sharing /root/Downloads/CryptoPro/cades_linux_amd64.tar.gz"
+
+   - name: Extract linux-amd64_deb.tgz to  /root/Downloads/CryptoPro/
+     unarchive: 
+         src: "{{ item }}"
+         dest: /root/Downloads/CryptoPro
+         remote_src: yes
+     with_items:
+         - /root/Downloads/CryptoPro/linux-amd64_deb.tgz
+         - /root/Downloads/CryptoPro/cades_linux_amd64.tar.gz
+
+   - name: Run install
+     command: "{{ item }}" 
+     with_items:
+         - "/root/Downloads/CryptoPro/linux-amd64_deb/install.sh"
+
+   - name: Add module
+     apt:
+        deb: "{{ item }}"
+     with_items:
+         -  /root/Downloads/CryptoPro/linux-amd64_deb/cprocsp-rdr-pcsc-64_4.0.9944-5_amd64.deb
+         -  /root/Downloads/CryptoPro/linux-amd64_deb/cprocsp-rdr-rutoken-64_4.0.9944-5_amd64.deb
+         -  /root/Downloads/CryptoPro/linux-amd64_deb/ifd-rutokens_1.0.1_amd64.deb
+         -  /root/Downloads/CryptoPro/linux-amd64_deb/cprocsp-rdr-gui-gtk-64_4.0.9944-5_amd64.deb
+
+
+   - name: restart service
+     service:
+        name: pcscd
+        state: restarted
+
+   - name: install browser plugin 
+     command: "{{ item }}"
+     with_items: 
+         - "/usr/bin/alien -kci /root/Downloads/CryptoPro/cprocsp-pki-2.0.0-amd64-cades.rpm"
+         - "/usr/bin/alien -kci /root/Downloads/CryptoPro/cprocsp-pki-2.0.0-amd64-plugin.rpm"
