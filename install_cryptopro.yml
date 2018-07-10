@@ -21,10 +21,10 @@
    - name: Creates directory Downloads
      file: path=/root/Downloads/CryptoPro/ state=directory
 
-   - name: Copy "gdown" script to /usr/local/bin
-     copy: src=gdown.pl
-           dest=/usr/local/bin/gdown
-           mode=0755
+     #   - name: Copy "gdown" script to /usr/local/bin
+     #     copy: src=gdown.pl
+     #           dest=/usr/local/bin/gdown
+     #           mode=0755
 
            #   - name: Download files
            #     command: "{{ item }}"
@@ -36,10 +36,12 @@
      unarchive: 
          src: "{{ item }}"
          dest: /root/Downloads/CryptoPro
-         remote_src: yes
+         #         remote_src: yes
      with_items:
-         - /root/Downloads/CryptoPro/linux-amd64_deb.tgz
-         - /root/Downloads/CryptoPro/cades_linux_amd64.tar.gz
+             #         - /root/Downloads/CryptoPro/linux-amd64_deb.tgz
+             #         - /root/Downloads/CryptoPro/cades_linux_amd64.tar.gz
+         - templates/linux-amd64_deb.tgz
+         - templates/cades_linux_amd64.tar.gz
 
    - name: Run install
      command: "{{ item }}" 
