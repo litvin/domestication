@@ -26,11 +26,11 @@
            dest=/usr/local/bin/gdown
            mode=0755
 
-   - name: Download files
-     command: "{{ item }}"
-     with_items:
-         - "/usr/local/bin/gdown https://drive.google.com/file/d/1KPjhuezY7Z0bCWh-EnYLv5Q238fHuSXK/view?usp=sharing  /root/Downloads/CryptoPro/linux-amd64_deb.tgz"
-         - "/usr/local/bin/gdown https://drive.google.com/file/d/1xuCodCVoHHle9EtUM5o9j8-oD-sY43V1/view?usp=sharing /root/Downloads/CryptoPro/cades_linux_amd64.tar.gz"
+           #   - name: Download files
+           #     command: "{{ item }}"
+           #     with_items:
+           #         - "/usr/local/bin/gdown https://drive.google.com/file/d/1KPjhuezY7Z0bCWh-EnYLv5Q238fHuSXK/view?usp=sharing  /root/Downloads/CryptoPro/linux-amd64_deb.tgz"
+           #         - "/usr/local/bin/gdown https://drive.google.com/file/d/1xuCodCVoHHle9EtUM5o9j8-oD-sY43V1/view?usp=sharing /root/Downloads/CryptoPro/cades_linux_amd64.tar.gz"
 
    - name: Extract linux-amd64_deb.tgz to  /root/Downloads/CryptoPro/
      unarchive: 
