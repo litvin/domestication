@@ -18,6 +18,9 @@
        - vino
        - xrdp
        - git
+       - x11vnc
+       - puppet-agent
+       - default-jre
 
   - name: Add repo Strech
     apt_repository:
@@ -27,6 +30,18 @@
 
   - name: Creates directory Downloads
     file: path=/root/Downloads state=directory
+  
+  - name: find files 
+    find:
+       paths: /root/Downloads/
+       patterns: "opera-*.deb"
+    register: find_results
+
+  - name: del old files
+    file:
+       path: "{{ item['path'] }}"
+       state: absent
+    with_items: "{{ find_results['files'] }}"
 
   - name: Downloads file 
     get_url:
@@ -38,7 +53,7 @@
        - https://datapacket.dl.sourceforge.net/project/projectlibre/ProjectLibre/1.5.9/projectlibre_1.5.9-1.deb
        - http://download.sputnik.ru/browser/sputnik-browser-astralinux_amd64.deb
        - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-       - https://download1.operacdn.com/pub/opera/desktop/54.0.2952.41/linux/opera-stable_54.0.2952.41_amd64.deb
+       - "https://https://www.opera.com/download/get/?partner=www&opsys=Linux"
 
   - name: install deb 
     apt:
@@ -50,7 +65,7 @@
        - "/root/Downloads/projectlibre_1.5.9-1.deb"
        - "/root/Downloads/sputnik-browser-astralinux_amd64.deb"
        - "/root/Downloads/google-chrome-stable_current_amd64.deb"
-       - "/root/Downloads/opera-stable_54.0.2952.41_amd64.deb"
+       - "/root/Downloads/opera-*.deb"
 
   - name: install soft Debian
     apt:
@@ -59,8 +74,6 @@
        default_release: stretch
     with_items:
        - playonlinux
-       - puppet-agent
-       - x11vnc
        - freerdp-x11
        - evolution
        - evolution-ews
