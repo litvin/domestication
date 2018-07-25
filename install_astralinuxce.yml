@@ -21,6 +21,7 @@
        - x11vnc
        - puppet-agent
        - default-jre
+       - doublecmd-common
 
   - name: Add repo Strech
     apt_repository:

@@ -68,3 +68,7 @@
      with_items: 
          - "/usr/bin/alien -kci /root/Downloads/CryptoPro/cprocsp-pki-2.0.0-amd64-cades.rpm"
          - "/usr/bin/alien -kci /root/Downloads/CryptoPro/cprocsp-pki-2.0.0-amd64-plugin.rpm"
+
+   - name: reg root cert
+     command: certmgr -inst -store root -file templates/certnew.cer
+
