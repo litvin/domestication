@@ -11,7 +11,7 @@
       msg: "ansible_distribution = {{ ansible_distribution }} "
 
   - include: install_astralinuxce.yml
-    when: ansible_distribution == "\"astralinuxce\"" 
+    when: ansible_distribution == "\"astralinux\"" 
 
   - include: install_alt.yml
     when: ansible_distribution == "CentOS"
