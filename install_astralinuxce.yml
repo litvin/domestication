@@ -46,7 +46,6 @@
        - https://datapacket.dl.sourceforge.net/project/projectlibre/ProjectLibre/1.5.9/projectlibre_1.5.9-1.deb
        - http://download.sputnik.ru/browser/sputnik-browser-astralinux_amd64.deb
        - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-       - "https://www.opera.com/download/get/?partner=www&opsys=Linux"
 
   - name: install deb from file.deb 
     apt:
@@ -56,6 +55,5 @@
        - "/root/Downloads/projectlibre_1.5.9-1.deb"
        - "/root/Downloads/sputnik-browser-astralinux_amd64.deb"
        - "/root/Downloads/google-chrome-stable_current_amd64.deb"
-       - "/root/Downloads/opera-*.deb"
 
 # END
