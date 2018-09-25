@@ -12,7 +12,6 @@
        - remmina
        - remmina-plugins
        - w3m
-       - default-jre
        - ethtool
        - lsb
        - lsb-core
@@ -21,7 +20,20 @@
        - xrdp
        - git
        - doublecmd-common
+       - doublecmd
        - evolution
        - sane
        - xsane
+       - google-chrome-preinstall
+       - chromium
+
+  - name: copy config 
+    copy: 
+        src: "./AltRPM/{{ item }}"
+        dest: "/tmp/{{ item }}"
+    with_items:
+        - google-chrome-stable_current_x86_64.rpm
+        - skypeforlinux-64.rpm
+        - opera-stable_55.0.2994.61_amd64.rpm
+        - sputnik-browser-altlinux.x86_64.rpm
 
