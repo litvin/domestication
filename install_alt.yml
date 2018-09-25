@@ -20,7 +20,7 @@
        - xrdp
        - git
        - doublecmd-common
-       - doublecmd
+       - doublecmd-gtk
        - evolution
        - sane
        - xsane
