@@ -1,5 +1,5 @@
 ---
-- hosts: orel
+- hosts: alt
   remote_user: rc
   become: yes
   become_user: root
@@ -14,4 +14,4 @@
     when: ansible_distribution == "\"astralinux\"" 
 
   - include: install_alt.yml
-    when: ansible_distribution == "CentOS"
+    when: ansible_distribution == "ALT"

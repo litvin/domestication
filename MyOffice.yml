@@ -1,0 +1,28 @@
+--- 
+- hosts: orel
+
+  remote_user: rc
+  become: yes
+  become_user: root
+  become_method: sudo
+  gather_facts: True
+
+  tasks:
+
+   - name: Creates directory Downloads
+     file: path=/root/Downloads/MyOffice/ state=directory
+
+   - name: Copy distr MyOfficeMail 
+     copy: src=MyOffice/MyOfficeMail.sh
+           dest=/root/Downloads/MyOffice/
+           mode=0755
+
+   - name: Copy distr MyOfficeEdit 
+     copy: src=MyOffice/MyOfficeEdit.run
+           dest=/root/Downloads/MyOffice/
+           mode=0755
+
+   - name: Copy distr MyOfficePresentation
+     copy: src=MyOffice/MyOfficePresentation.deb
+           dest=/root/Downloads/MyOffice/
+           mode=0755

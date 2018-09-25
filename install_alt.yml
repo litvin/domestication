@@ -1,7 +1,27 @@
   - name: install soft AltLinux
-    apt:
-       name: "{{ item }}"
+    apt_rpm:
+       pkg: "{{ item }}"
        state: present
+       update_cache: yes
     with_items:
        - mc
-       - sudo 
+       - sudo
+       - pam_mount
+       - cifs-utils
+       - i586-wine-vanilla
+       - remmina
+       - remmina-plugins
+       - w3m
+       - default-jre
+       - ethtool
+       - lsb-base
+       - lsb-core
+       - alien
+       - vino
+       - xrdp
+       - git
+       - default-jre
+       - doublecmd-common
+       - evolution
+
+
