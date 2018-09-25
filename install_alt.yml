@@ -14,14 +14,14 @@
        - w3m
        - default-jre
        - ethtool
-       - lsb-base
+       - lsb
        - lsb-core
        - alien
        - vino
        - xrdp
        - git
-       - default-jre
        - doublecmd-common
        - evolution
-
+       - sane
+       - xsane
 
